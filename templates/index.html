@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAM HOSPITAL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f5f7fa;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #0056b3;
+      overflow: hidden;
+    }
+
+    nav a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background-color: #003f7f;
+    }
+
+    section {
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #007bff;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin: 8px 0 4px;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    footer {
+      background-color: #0056b3;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FAM HOSPITAL</h1>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#patients">Patient Registration</a>
+    <a href="#doctors">Doctors</a>
+    <a href="#appointments">Appointments</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="home">
+    <div class="container">
+      <h2>Welcome to FAM Hospital</h2>
+      <p>We provide world-class medical services with the best doctors and staff. Manage patients, doctors, and appointments easily through this system.</p>
+    </div>
+  </section>
+
+  <!-- ✅ Patient Registration -->
+  <section id="patients">
+    <div class="container">
+      <h2>Patient Registration</h2>
+      <form action="/register_patient" method="POST">
+        <label>Full Name:</label>
+        <input type="text" name="name" placeholder="Enter patient's full name" required>
+
+        <label>Age:</label>
+        <input type="number" name="age" placeholder="Enter age" required>
+
+        <label>Gender:</label>
+        <select name="gender" required>
+          <option>Select Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+
+        <label>Address:</label>
+        <textarea name="address" placeholder="Enter address"></textarea>
+
+        <label>Phone Number:</label>
+        <input type="tel" name="phone" placeholder="Enter phone number" required>
+
+        <button type="submit">Register Patient</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ✅ Doctor Section -->
+  <section id="doctors">
+    <div class="container">
+      <h2>Our Doctors</h2>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Experience</th>
+        </tr>
+        <tr>
+          <td>Dr. John Smith</td>
+          <td>Cardiology</td>
+          <td>10 Years</td>
+        </tr>
+        <tr>
+          <td>Dr. Priya Menon</td>
+          <td>Neurology</td>
+          <td>8 Years</td>
+        </tr>
+        <tr>
+          <td>Dr. Rahul Verma</td>
+          <td>Orthopedics</td>
+          <td>12 Years</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ✅ Appointment Booking -->
+  <section id="appointments">
+    <div class="container">
+      <h2>Book an Appointment</h2>
+      <form action="/book_appointment" method="POST">
+        <label>Patient Name:</label>
+        <input type="text" name="patient_name" placeholder="Enter patient name" required>
+
+        <label>Select Doctor:</label>
+        <select name="doctor_name" required>
+          <option>Select Doctor</option>
+          <option>Dr. John Smith - Cardiology</option>
+          <option>Dr. Priya Menon - Neurology</option>
+          <option>Dr. Rahul Verma - Orthopedics</option>
+        </select>
+
+        <label>Date:</label>
+        <input type="date" name="date" required>
+
+        <label>Time:</label>
+        <input type="time" name="time" required>
+
+        <button type="submit">Book Appointment</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ✅ Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p><b>Address:</b> 123, City Hospital Road, Kochi, India</p>
+      <p><b>Email:</b> fam@gmail.com</p>
+      <p><b>Phone:</b> <a href="tel:+918590249168">+91 85902 49168</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 FAM HOSPITAL | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Update Appointment - FAM Hospital{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Update Appointment</h2>
+    
+    <form method="POST" class="appointment-form">
+        <div class="form-group">
+            <label for="patient_name">Patient Name:</label>
+            <input type="text" id="patient_name" name="patient_name" value="{{ appointment[1] }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="doctor_name">Doctor Name:</label>
+            <select id="doctor_name" name="doctor_name" required>
+                <option value="Dr. John Smith - Cardiology" {% if appointment[2] == 'Dr. John Smith - Cardiology' %}selected{% endif %}>Dr. John Smith - Cardiology</option>
+                <option value="Dr. Priya Menon - Neurology" {% if appointment[2] == 'Dr. Priya Menon - Neurology' %}selected{% endif %}>Dr. Priya Menon - Neurology</option>
+                <option value="Dr. Rahul Verma - Orthopedics" {% if appointment[2] == 'Dr. Rahul Verma - Orthopedics' %}selected{% endif %}>Dr. Rahul Verma - Orthopedics</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" value="{{ appointment[3] }}" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" value="{{ appointment[4] }}" required>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Update Appointment</button>
+            <a href="{{ url_for('view_appointments') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

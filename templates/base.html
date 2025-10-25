@@ -1,0 +1,70 @@
+<!-- Hospital Management System - Base Template -->
+<!-- This is the base template that all other templates extend from -->
+<!-- It provides the common structure, navigation, and styling for the entire application -->
+
+<!DOCTYPE html>  <!-- HTML5 document type declaration -->
+<html lang="en">  <!-- HTML root element with English language attribute -->
+<head>  <!-- Document head section containing metadata -->
+    <meta charset="UTF-8">  <!-- Character encoding declaration for UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Responsive viewport meta tag -->
+    <title>{% block title %}FAM Hospital{% endblock %}</title>  <!-- Page title with block for customization -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  <!-- Link to main stylesheet -->
+</head>
+<body>  <!-- Document body containing all visible content -->
+    <!-- Application Header Section -->
+    <header>  <!-- Main header element for the application -->
+        <div class="header-content">  <!-- Container for header content with styling -->
+            <h1>FAM Hospital</h1>  <!-- Main hospital name heading -->
+            <!-- Conditional user information display - only shown if user is logged in -->
+            {% if session.user_id %}  <!-- Check if user is logged in by verifying session -->
+                <div class="user-info">  <!-- Container for user information -->
+                    <span>Welcome, {{ session.full_name or session.username }}</span>  <!-- Welcome message with user's name -->
+                    <span class="user-role">({{ session.user_role.title() }})</span>  <!-- Display user's role in parentheses -->
+                </div>
+            {% endif %}  <!-- End of conditional user information block -->
+        </div>  <!-- End of header content container -->
+    </header>  <!-- End of header section -->
+
+    <!-- Navigation Menu - only displayed for logged-in users -->
+    {% if session.user_id %}  <!-- Check if user is logged in -->
+    <nav>  <!-- Navigation element containing menu items -->
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>  <!-- Link to dashboard page -->
+        <a href="{{ url_for('view_patients') }}">Patients</a>  <!-- Link to patients page -->
+        <a href="{{ url_for('view_appointments') }}">Appointments</a>  <!-- Link to appointments page -->
+        <a href="{{ url_for('view_medical_records') }}">Medical Records</a>  <!-- Link to medical records page -->
+        <!-- Admin-only navigation item -->
+        {% if session.user_role == 'admin' %}  <!-- Check if user has admin role -->
+            <a href="{{ url_for('view_users') }}">Users</a>  <!-- Link to user management (admin only) -->
+        {% endif %}  <!-- End of admin-only navigation block -->
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>  <!-- Logout link with special styling -->
+    </nav>  <!-- End of navigation menu -->
+    {% endif %}  <!-- End of logged-in user navigation block -->
+
+    <!-- Main Content Area -->
+    <main>  <!-- Main content container -->
+        <!-- Flash Messages Section - displays system messages to users -->
+        {% with messages = get_flashed_messages(with_categories=true) %}  <!-- Get flash messages with categories -->
+            {% if messages %}  <!-- Check if there are any flash messages -->
+                <div class="flash-messages">  <!-- Container for flash messages -->
+                    {% for category, message in messages %}  <!-- Loop through each flash message -->
+                        <div class="alert alert-{{ category }}">  <!-- Alert div with category-specific styling -->
+                            {{ message }}  <!-- Display the flash message content -->
+                        </div>  <!-- End of individual alert div -->
+                    {% endfor %}  <!-- End of flash messages loop -->
+                </div>  <!-- End of flash messages container -->
+            {% endif %}  <!-- End of flash messages conditional -->
+        {% endwith %}  <!-- End of flash messages block -->
+
+        <!-- Content Block - where page-specific content will be inserted -->
+        {% block content %}{% endblock %}  <!-- Block for child templates to override with their content -->
+    </main>  <!-- End of main content area -->
+
+    <!-- Footer Section -->
+    <footer>  <!-- Footer element for the application -->
+        <p>&copy; 2025 FAM Hospital | All Rights Reserved</p>  <!-- Copyright notice -->
+    </footer>  <!-- End of footer section -->
+
+    <!-- JavaScript File - includes client-side functionality -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>  <!-- Link to main JavaScript file -->
+</body>  <!-- End of document body -->
+</html>  <!-- End of HTML document -->
